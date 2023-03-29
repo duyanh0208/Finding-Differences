@@ -16,14 +16,14 @@ def Thresh_Dilated(dissimilar):
 
 
 def spotting(level):
-    imagine1 = cv2.imread("output/left_"+ str(level) + ".jpg")
-    imagine2 = cv2.imread("output/right_"+ str(level) + ".jpg")
-    imagine1 = imutils.resize(imagine1, height=460)
-    imagine2 = imutils.resize(imagine2, height=460)
+    image1 = cv2.imread("output/left_"+ str(level) + ".jpg")
+    image2 = cv2.imread("output/right_"+ str(level) + ".jpg")
+    image1 = imutils.resize(image1, height=460)
+    image2 = imutils.resize(image2, height=460)
 
-    img_height = imagine1.shape[0]
+    img_height = image1.shape[0]
 
-    dissimilar = cv2.absdiff(imagine1, imagine2)
+    dissimilar = cv2.absdiff(image1, image2)
 
     dilate = Thresh_Dilated(dissimilar)
 
@@ -34,11 +34,11 @@ def spotting(level):
         if cv2.contourArea(edge) >= 60:
             cnt += 1
             x, y, w, h = cv2.boundingRect(edge)
-            cv2.rectangle(imagine1, (x, y), (x + w, y + h), (0, 0, 255), 2)
-            cv2.rectangle(imagine2, (x, y), (x + w, y + h), (0, 0, 255), 2)
+            cv2.rectangle(image1, (x, y), (x + w, y + h), (0, 0, 255), 2)
+            cv2.rectangle(image2, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
     x = np.zeros((img_height, 10, 3), np.uint8)
-    outcome = np.hstack((imagine1, x, imagine2))
+    outcome = np.hstack((image1, x, image2))
     cv2.imshow("Showing differences", outcome)
 
     cv2.waitKey(0)
