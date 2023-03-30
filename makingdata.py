@@ -2,8 +2,6 @@ import cv2
 import numpy as np
 
 
-
-
 def processing_data(path, level, limit):
     def smoothing(img):
         grey = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -37,7 +35,6 @@ def processing_data(path, level, limit):
     if level == 1:
         minn = area[int(distance / 2) + int(distance / 3) + 1]
         maxx = area[distance - 1]
-
 
     Limit = 6
 
